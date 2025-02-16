@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Start Page{% endblock %}
+
+{% block navigation %}
+<nav class="navbar border-bottom" style="background-color: #fae7d3">
+  <a class="nav-link text-danger" href="/">ToDoList</a>
+  <ul class="nav ml-auto navbar-expand-lg">
+    <li class="nav-item">
+      <a class="nav-link text-danger" href="/login">Login</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-danger" href="/register">Register</a>
+    </li>
+  </ul>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="container  start mt-5 mb-0 pb-2">
+    <div class="jumbotron text-center bg-light">
+      <h1 class="display-4 text-danger">Welcome to To-Do List!</h1>
+      <p class="lead">Manage your tasks efficiently and stay organized.</p>
+      <hr class="mt-4">
+      <p>Use the navigation bar to add tasks, view all your tasks, or log out.</p>
+      <a class="btn btn-outline-dark btn-lg" href="/login" role="button">Start now!</a>
+    </div>
+  </div>
+{% endblock %}

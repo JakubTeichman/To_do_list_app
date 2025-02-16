@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+
+{% import "bootstrap/utils.html" as utils %}
+
+{% block navigation %}
+  <nav class="navbar border-bottom" style="background-color: #fae7d3">
+    <a class="nav-link text-danger" href="/">ToDoList</a>
+    <ul class="nav ml-auto navbar-expand-lg">
+      {% if role != 'admin' %}
+      <li class="nav-item">
+        <a class="nav-link text-danger" href="/task/add">Add</a>
+      </li>
+      {% endif %}
+      {% if role == 'admin' %}
+      <li class="nav-item">
+          <a class="nav-link text-danger" href="/admin/dashboard">View all tasks</a>
+        </li>
+      {% endif %}
+      <li class="nav-item">
+        <a class="nav-link text-danger" href="/logout">Log out</a>
+      </li>
+    </ul>
+  </nav>
+{% endblock %}
+
+{% block content %}
+<h2 class="display-4 text-light">Tasks</h2>
+<div class="container mt-5">
+    <div class="row">
+    {% for task in tasks %}
+        <div class="col-md-4">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ task.title }}</h5>
+                    <p class="card-text">{{ task.deadline.strftime('%Y-%m-%d') }}</p>
+                    <p class="card-text">{{ task.description }}</p>
+                    {% if role != 'admin' %}
+                    <a href="/task/{{ task.id }}/edit" class="btn btn-outline-dark">Edit</a>
+                    <a href="/task/{{ task.id }}/delete" class="btn btn-outline-dark">Delete</a>
+                    {% endif %}
+                    {% if role == 'admin' %}
+                    <h6 class="card-title">User: {{ task.author.username }}</h5>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% if loop.index % 3 == 0 and not loop.last %}
+            </div><div class="row">
+        {% endif %}
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
